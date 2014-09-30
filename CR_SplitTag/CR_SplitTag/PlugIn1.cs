@@ -41,9 +41,13 @@ namespace CR_SplitTag
             SplitTag.Apply += SplitTag_Apply;
             ((System.ComponentModel.ISupportInitialize)(SplitTag)).EndInit();
         }
+
         private void SplitTag_CheckAvailability(Object sender, CheckContentAvailabilityEventArgs ea)
         {
-            SP.HtmlElement tag = (SP.HtmlElement) ea.Element.Parent;
+            LanguageElement element = ea.Element;
+            if ((element as SP.HtmlText) == null)
+                return;
+            SP.HtmlElement tag = (element.Parent as SP.HtmlElement);
             if (tag == null)
                 return;
             ea.Available = true;
