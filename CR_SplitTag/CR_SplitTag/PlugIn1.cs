@@ -38,6 +38,7 @@ namespace CR_SplitTag
             SplitTag.ProviderName = "SplitTag"; // Should be Unique
             SplitTag.DisplayName = "Split Tag";
             SplitTag.CheckAvailability += SplitTag_CheckAvailability;
+            SplitTag.PreparePreview += SplitTag_PreparePreview;
             SplitTag.Apply += SplitTag_Apply;
             ((System.ComponentModel.ISupportInitialize)(SplitTag)).EndInit();
         }
@@ -51,6 +52,13 @@ namespace CR_SplitTag
             if (tag == null)
                 return;
             ea.Available = true;
+        }
+
+        void SplitTag_PreparePreview(object sender, PrepareContentPreviewEventArgs ea)
+        {
+            SP.HtmlElement tag = (SP.HtmlElement)ea.Element.Parent;
+            string code = String.Format("</{0}>{1}<{0}>", tag.Name, System.Environment.NewLine);
+            ea.AddCodePreview(ea.Selection.StartSourcePoint, code);
         }
 
         private void SplitTag_Apply(Object sender, ApplyContentEventArgs ea)
