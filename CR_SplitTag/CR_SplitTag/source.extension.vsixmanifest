@@ -3,7 +3,7 @@
     <Identifier Id="CR_SplitTag">
         <Name>SplitTag for CodeRush</Name>
         <Author>Rory Becker</Author>
-        <Version>1.0</Version>
+        <Version>1.1</Version>
         <Description xml:space="preserve">Adds a CodeProvider which splits the current HTML or XML tag into 2 pieces</Description>
         <Locale>1033</Locale>
         <Icon>CR-Plug-in.png</Icon>
