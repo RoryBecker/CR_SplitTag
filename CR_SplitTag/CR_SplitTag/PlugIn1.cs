@@ -51,12 +51,14 @@ namespace CR_SplitTag
 
         private void SplitTag_Apply(Object sender, ApplyContentEventArgs ea)
         {
-            // This method is executed when the system executes your Code 
+            SourceRange range = ea.Element.Parent.Parent.Range;
             SP.HtmlElement tag = (SP.HtmlElement)ea.Element.Parent;
-            string tagSplitter = String.Format("</{0}>{1}<{0}>", tag.Name, System.Environment.NewLine);
-            ea.TextDocument.InsertText(ea.Selection.StartSourcePoint, tagSplitter);
+            string code = String.Format("</{0}>{1}<{0}>", tag.Name, System.Environment.NewLine);
+            using (ea.TextDocument.NewCompoundAction("Split Tag"))
+            {
+                ea.TextDocument.InsertText(ea.Selection.StartSourcePoint, code);
+                ea.TextDocument.Format(range, true);
+            }
         }
-
-        
     }
 }
